@@ -1,0 +1,9 @@
+/target
+/qyou-web/node-modules
+/docs
+/build
+/backup
+/static
+/Archive.tar.gz
+/Cargo.lock
+/config.json

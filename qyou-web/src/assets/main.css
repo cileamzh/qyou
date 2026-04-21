@@ -1,0 +1,266 @@
+/* main.css */
+
+:root {
+    /* 颜色定义 */
+    --main-bg: linear-gradient(135deg, #787aff 0%, #b260ff 100%);
+    --card-bg: rgba(255, 255, 255, 0.297);
+    --title-color: rgb(255, 239, 237);
+    --text-color: rgb(81, 54, 168);
+    --button-bg: rgba(255, 255, 255, 0.696);
+    --button-color: rgb(106, 85, 202);
+    --button--bg-hover: rgba(255, 255, 255, 0.874);
+
+    /* 字体与间距 */
+    --title-size: 32px;
+    --title-weight: 800;
+    --text-weight: 600;
+    --text-size: 18px;
+    --base-padding: 10px;
+    --mini-padding: 5px;
+    --max-padding: 15px;
+    --base-radius: 12px;
+    /* 稍微增加圆角显得更现代 */
+
+    /* 动画 */
+    --dur-fast: 0.2s;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--main-bg);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+}
+
+.fullscreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--base-padding);
+}
+
+/* --- 标题样式 --- */
+.title {
+    font-weight: var(--title-weight);
+    padding: var(--base-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--title-color);
+    font-size: var(--title-size);
+}
+
+/* --- 文本输入框优化 (Input) --- */
+input:not([type="checkbox"]) {
+    border: 2px solid transparent;
+    /* 预留边框位置防止抖动 */
+    outline: none;
+    padding: var(--base-padding) var(--max-padding);
+    background: var(--button-bg);
+    border-radius: var(--base-radius);
+    color: var(--text-color);
+    font-weight: var(--text-weight);
+    font-size: var(--text-size);
+    transition: all var(--dur-fast) ease;
+    width: 100%;
+}
+
+input:not([type="checkbox"]):hover {
+    background: var(--button--bg-hover);
+}
+
+input:not([type="checkbox"]):focus {
+    background: var(--button--bg-hover);
+    border-color: var(--button-color);
+    /* 聚焦时显示蓝色边框 */
+    box-shadow: 0 0 10px rgba(82, 128, 255, 0.2);
+}
+
+input::placeholder {
+    color: var(--text-color);
+    opacity: 0.5;
+}
+
+/* --- 自定义复选框 (Checkbox) --- */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    background: var(--button-bg);
+    cursor: pointer;
+    position: relative;
+    transition: all var(--dur-fast) ease;
+    display: inline-grid;
+    place-content: center;
+    vertical-align: middle;
+}
+
+input[type="checkbox"]:hover {
+    background: var(--button--bg-hover);
+    transform: scale(1.05);
+}
+
+input[type="checkbox"]:checked {
+    background: var(--button-color);
+}
+
+input[type="checkbox"]::after {
+    content: '';
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+    display: none;
+    margin-bottom: 2px;
+}
+
+input[type="checkbox"]:checked::after {
+    display: block;
+}
+
+input[type="checkbox"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+/* --- 按钮样式 --- */
+.button {
+    cursor: pointer;
+    border: none;
+    color: var(--button-color);
+    padding: var(--base-padding);
+    width: 100%;
+    border-radius: var(--base-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--title-weight);
+    background: var(--button-bg);
+    transition: all var(--dur-fast) ease;
+}
+
+.button:hover {
+    background: var(--button--bg-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+/* --- 容器组件 --- */
+.card {
+    border-radius: var(--base-radius);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: var(--card-bg);
+    padding: var(--max-padding);
+    backdrop-filter: blur(8px);
+    /* 毛玻璃效果 */
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+
+/* --- 悬浮按钮 --- */
+.hover-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--dur-fast) ease;
+    color: var(--button-color);
+    background: var(--button-bg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.hover-button:hover {
+    background: var(--button--bg-hover);
+}
+
+/* --- 选择器组件 --- */
+.selector {
+    display: flex;
+    border-radius: var(--base-radius);
+    overflow: hidden;
+    background: var(--button-bg);
+    padding: 4px;
+}
+
+.selector>* {
+    padding: var(--mini-padding) var(--base-padding);
+    cursor: pointer;
+    border-radius: calc(var(--base-radius) - 4px);
+    transition: background var(--dur-fast);
+}
+
+.selector>*.select {
+    background: var(--button--bg-hover);
+    color: var(--button-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+
+
+/* --- 滚动条优化 --- */
+.scroller {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: 8px;
+    width: 100%;
+    padding-right: 4px;
+    align-items: center;
+}
+
+.scroller::-webkit-scrollbar {
+    width: 5px;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    background: var(--button-bg);
+    border-radius: 10px;
+}
+
+.select {
+    background: var(--button--bg-hover);
+    color: var(--button-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
