@@ -80,8 +80,8 @@ if (fs.existsSync(webDistDir)) {
 console.log(`\n打包最终产物到 build 文件夹...`);
 
 // 复制二进制文件
-// 假设二进制文件名与目录名一致。如果不一致，请手动修改此处字符串
-const projectName = path.basename(rootDir);
+const binaryName = "qyou";
+const projectName = path.basename(binaryName);
 const exeExtension = process.platform === 'win32' ? '.exe' : '';
 const binarySource = path.join(rootDir, 'target', 'release', projectName + exeExtension);
 
