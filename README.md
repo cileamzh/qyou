@@ -10,12 +10,12 @@
 
  ### 主页面
 
-![主页面预览]("preview/pv1.png")
+![主页面预览](/preview/pv1.png)
 
 ### 编辑页
 
-![编辑页预览]("preview/pv2.png") 
+![编辑页预览](/preview/pv2.png) 
 
 ### 填表页
 
-![填表页预览]("preview/pv3.png")
+![填表页预览](/preview/pv3.png)
