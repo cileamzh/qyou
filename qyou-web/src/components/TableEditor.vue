@@ -1,36 +1,40 @@
 <template>
     <div id="table-editor" v-if="model">
-        <div class="col card" id="baseinfo">
-            <div class="col" style="align-items: center;">
+        <div class="scroller card" id="baseinfo">
+            <div class="col" id="table-title" style="align-items: center;">
                 <h2 class="title">问卷配置</h2>
                 <div>({{ model.name }})</div>
             </div>
-            <div class="col">
+            <div class="col" id="table-inputs">
                 <label class="text-sub fs-xs">问卷标题:</label>
                 <input v-model="model.title" placeholder="请输入问卷标题..." />
             </div>
-            <div class="row">
-                <span class="text-sub">启用状态</span>
-                <input type="checkbox" v-model="model.enable" />
-            </div>
-            <div class="row">
-                <span class="text-main">实名提交</span>
-                <input type="checkbox" v-model="model.know_who" />
+            <div class="col" id="table-toggles">
+                <div class="row">
+                    <span class="text-sub">启用状态</span>
+                    <input type="checkbox" v-model="model.enable" />
+                </div>
+                <div class="row">
+                    <span class="text-main">实名提交</span>
+                    <input type="checkbox" v-model="model.know_who" />
+                </div>
             </div>
 
+            <div class="col" id="table-buttons">
+                <div @click="addQuestion" id="add" class="button">
+                    + 添加新题目
+                </div>
+                <div id="submit" class="button" @click="save">
+                    保存问卷
+                </div>
+                <div id="delete" class="button" @click="remoeve">
+                    删除问卷
+                </div>
+            </div>
 
-            <div @click="addQuestion" id="add" class="button">
-                + 添加新题目
-            </div>
-            <div id="submit" class="button" @click="save">
-                保存问卷
-            </div>
-            <div id="delete" class="button" @click="remoeve">
-                删除问卷
-            </div>
         </div>
-        <div class="scroller" id="questions">
-            <div v-for="(q, index) in model.questions" :key="index" class="card">
+        <div class="scroller " id="questions">
+            <div v-for="(q, index) in model.questions" :key="index" class="card question">
                 <!-- <div class="title">问题{{ index + 1 }}</div> -->
                 <input v-model="q.question" placeholder="输入题目内容..." />
                 <div class="row">
@@ -125,35 +129,90 @@ const remoeve = () => {
     display: flex;
     padding: 20px;
     overflow: hidden;
-    gap: 20px;
-    /* 防止整体出现滚动条 */
+    gap: 10px;
 }
 
 #baseinfo {
-    width: 500px;
+    max-width: 300px;
     padding: 20px;
     height: 100%;
 
 }
 
-#list-title {
-    grid-area: ls;
-    /* 对应 grid-template-areas 中的 ls */
-    padding: 0;
-    justify-content: flex-start;
-    /* 标题靠左 */
+#questions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    align-items: start;
 }
 
-#questions {
-    grid-area: ts;
-    /* 对应 grid-template-areas 中的 ts */
-    overflow-y: auto;
-    /* 只有题目列表部分滚动 */
-    padding-right: 10px;
-    /* 给滚动条留点空间 */
+.question {
+    height: 100%;
 }
 
 #delete {
     color: rgb(255, 101, 101);
+}
+
+@media screen and (max-width:768px) {
+    #table-editor {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        overflow: hidden;
+        flex-direction: column;
+        gap: 10px;
+        flex-direction: column-reverse;
+    }
+
+    #baseinfo {
+        width: 100%;
+        max-width: 1000px;
+        display: grid;
+        overflow-y: auto;
+        padding: 10px;
+        max-height: 240px
+    }
+
+    #table-title {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    #table-inputs {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    #table-inputs>input {
+        height: 30px;
+    }
+
+    #table-inputs>label {
+        max-width: 100px;
+    }
+
+    #table-buttons {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #table-buttons>.button {
+        height: 40px;
+        font-size: 12px;
+    }
+
+    #table-toggles {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #questions {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
 }
 </style>
